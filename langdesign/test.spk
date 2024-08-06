@@ -1,0 +1,10 @@
+begin comment This is a single-line end comment
+declare x integer
+x equals 5
+
+begin comment
+This is a multi-line comment
+It can span several lines
+end comment
+
+print x

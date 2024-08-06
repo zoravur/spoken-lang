@@ -1,0 +1,5 @@
+declare x
+declare y
+x equals 5
+y equals x
+print call sum with begin x y end

@@ -1,0 +1,17 @@
+hello spock
+
+define function main
+begin
+
+end
+
+
+begin definition main
+    define variable a to be 10
+    define variable b to be 20
+    print the sum of a and b
+end definition
+
+run main
+
+goodbye spock

@@ -1,0 +1,10 @@
+declare x
+declare y
+x equals 4
+y equals x
+x equals 3
+print y
+print x
+declare message string
+message equals quote Hello Spock unquote
+print message

@@ -1,0 +1,1 @@
+antlr4 -Dlanguage=Python3 -visitor Spock.g4 -o gen

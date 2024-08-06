@@ -1,0 +1,7 @@
+declare x integer
+x equals 5
+print x
+declare message string
+message equals quote Hello Spock unquote
+print message
+
