@@ -1,0 +1,40 @@
+define square equals
+lambda
+takes left
+x
+right and
+does
+begin return call
+product the left
+x x
+right end
+define
+m equals
+10
+while left
+m
+right begin
+print
+call
+square left
+call
+difference left
+10 m
+right
+right
+m equals
+call difference
+left
+m1
+right
+print end 
+line 8:8 extraneous input 'the' expecting 'left'
+line 30:6 mismatched input 'end' expecting {'lambda', 'call', WORD_NUMBER, ID, STRING, NUMBER}
+Traceback (most recent call last):
+  File "/home/zoravur/Documents/side-projects/spoken-lang/spock/../spock/main.py", line 69, in <module>
+    main()
+  File "/home/zoravur/Documents/side-projects/spoken-lang/spock/../spock/main.py", line 58, in main
+    interpret_live(interpreter)
+  File "/home/zoravur/Documents/side-projects/spoken-lang/spock/../spock/main.py", line 34, in interpret_live
+    for line in sys.stdin:
+KeyboardInterrupt

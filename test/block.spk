@@ -1,0 +1,8 @@
+begin comment this should print five but it prints four end comment
+declare x
+x equals 5
+begin
+    declare x
+    x equals 4
+end
+print x

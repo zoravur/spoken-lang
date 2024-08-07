@@ -1,0 +1,10 @@
+define square equals lambda takes 
+  left x right and does 
+  begin 
+    return call product left x x right 
+  end
+define m equals 10
+while left m right begin
+    print call square left call difference left 10 m right right
+    m equals call difference left m 1 right
+end

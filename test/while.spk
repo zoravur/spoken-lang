@@ -1,0 +1,7 @@
+begin comment this prints 10 9 8 7 6 5 4 3 2 1 end comment
+declare x
+x equals 10
+while left x right begin
+    print x
+    x equals call difference left x 1 right
+end

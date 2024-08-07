@@ -35,6 +35,15 @@ class SpockListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by SpockParser#returnStatement.
+    def enterReturnStatement(self, ctx:SpockParser.ReturnStatementContext):
+        pass
+
+    # Exit a parse tree produced by SpockParser#returnStatement.
+    def exitReturnStatement(self, ctx:SpockParser.ReturnStatementContext):
+        pass
+
+
     # Enter a parse tree produced by SpockParser#block.
     def enterBlock(self, ctx:SpockParser.BlockContext):
         pass
@@ -68,6 +77,15 @@ class SpockListener(ParseTreeListener):
 
     # Exit a parse tree produced by SpockParser#assignment.
     def exitAssignment(self, ctx:SpockParser.AssignmentContext):
+        pass
+
+
+    # Enter a parse tree produced by SpockParser#definition.
+    def enterDefinition(self, ctx:SpockParser.DefinitionContext):
+        pass
+
+    # Exit a parse tree produced by SpockParser#definition.
+    def exitDefinition(self, ctx:SpockParser.DefinitionContext):
         pass
 
 

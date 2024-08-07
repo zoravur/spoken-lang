@@ -1,0 +1,15 @@
+begin comment this program prints the first 10 fibonacci numbers end comment
+declare n
+declare a
+declare b
+declare c
+n equals 21
+a equals 0
+b equals 1
+while left n right begin
+    c equals call sum left a b right
+    print c
+    a equals b
+    b equals c
+    n equals call difference left n 1 right
+end

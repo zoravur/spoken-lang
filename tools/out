@@ -1,0 +1,12 @@
+define x equals
+5
+print x 
+line 1:7 extraneous input 'x' expecting 'equals'
+Traceback (most recent call last):
+  File "/home/zoravur/Documents/side-projects/spoken-lang/tools/../spock/main.py", line 69, in <module>
+    main()
+  File "/home/zoravur/Documents/side-projects/spoken-lang/tools/../spock/main.py", line 58, in main
+    interpret_live(interpreter)
+  File "/home/zoravur/Documents/side-projects/spoken-lang/tools/../spock/main.py", line 34, in interpret_live
+    for line in sys.stdin:
+KeyboardInterrupt

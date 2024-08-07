@@ -1,0 +1,30 @@
+Help me write a g4 file for the following language, Spock, which is designed to be spoken aloud. It has no punctuation, only words. it is case insensitive, and whitespace insensitive:
+
+```
+program : statement+
+statement : declaration | assignment | PRINT expression | block ; // Is a declaration a type of assignment? I don't know
+block: BEGIN statement+ END
+declaration : DECLARE ID ;
+type : FUN, INT, STR ;
+assignment : ID EQUALS expression ;
+expression : ID | STRING | NUMBER | lambda ;
+lambda : LAMBDA TAKES list AND DOES block
+list : BEGIN ID+ END
+
+
+// Lexer rules -- these are regexes, meaning the words are just equivalent to themselves
+DECLARE : declare ;
+ID : [a-zA-Z]+ ;
+FUN : function ;
+INT : integer ;
+STR : string ;
+EQUALS : equals ;
+STRING : quote \w+ unquote ;
+NUMBER : \d+ ;
+LAMBDA : lambda
+TAKES : takes ;
+AND : and ;
+DOES : does ;
+BEGIN : begin ;
+END : end ;
+```

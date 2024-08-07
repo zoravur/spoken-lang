@@ -1,0 +1,4 @@
+declare x
+x equals 1
+x equals call sum left x 1 right
+print x

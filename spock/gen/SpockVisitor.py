@@ -24,6 +24,11 @@ class SpockVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by SpockParser#returnStatement.
+    def visitReturnStatement(self, ctx:SpockParser.ReturnStatementContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by SpockParser#block.
     def visitBlock(self, ctx:SpockParser.BlockContext):
         return self.visitChildren(ctx)
@@ -41,6 +46,11 @@ class SpockVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by SpockParser#assignment.
     def visitAssignment(self, ctx:SpockParser.AssignmentContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SpockParser#definition.
+    def visitDefinition(self, ctx:SpockParser.DefinitionContext):
         return self.visitChildren(ctx)
 
 

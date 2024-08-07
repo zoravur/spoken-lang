@@ -1,36 +1,3 @@
-/*
-
-Help me write a g4 file for the following language, Spock, which is designed to be spoken aloud. It has no punctuation, only words. it is case insensitive, and whitespace insensitive:
-
-program : statement+
-statement : declaration | assignment | PRINT expression | block ; // Is a declaration a type of assignment? I don't know
-block: BEGIN statement+ END
-declaration : DECLARE ID ;
-type : FUN, INT, STR ;
-assignment : ID EQUALS expression ;
-expression : ID | STRING | NUMBER | lambda ;
-lambda : LAMBDA TAKES list AND DOES block
-list : BEGIN ID+ END
-
-
-// Lexer rules -- these are regexes, meaning the words are just equivalent to themselves
-DECLARE : declare ;
-ID : [a-zA-Z]+ ;
-FUN : function ;
-INT : integer ;
-STR : string ;
-EQUALS : equals ;
-STRING : quote \w+ unquote ;
-NUMBER : \d+ ;
-LAMBDA : lambda
-TAKES : takes ;
-AND : and ;
-DOES : does ;
-BEGIN : begin ;
-END : end ;
-
-*/
-
 grammar Spock;
 
 options { caseInsensitive=true; }
@@ -39,22 +6,31 @@ options { caseInsensitive=true; }
 program : statement+ ;
 
 statement : declaration
+          | definition
           | assignment
           | printStatement 
           | whileLoop
+          | returnStatement
+          | ifStatement
           | block ;
 
 printStatement : 'print' expression ;
 
+returnStatement : 'return' expression ;
+
 block : 'begin' statement+ 'end' ;
 
-declaration : 'declare' ID type? ;
+declaration : 'declare' ID ;
 
 type : 'function' | 'integer' | 'string' ;
 
 assignment : ID 'equals' expression ;
 
+definition : 'define' ID 'equals' expression ;
+
 whileLoop : 'while' 'left' expression 'right' statement ;
+
+ifStatement : 'if' 'left' expression 'right' statement ;
 
 expression : ID
            | STRING
@@ -67,7 +43,7 @@ lambda : 'lambda' 'takes' arglist 'and' 'does' block ;
 
 call : 'call' ID list ;
 
-arglist : 'begin' ID+ 'end' ;
+arglist : 'left' ID+ 'right' ;
 
 list : 'left' expression+ 'right' ;
 
