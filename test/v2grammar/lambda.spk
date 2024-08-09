@@ -1,0 +1,10 @@
+define square as lambda takes 
+  x does 
+  begin 
+    return call product with x and x 
+  finish
+define m as 10
+while m begin
+    print call square with call difference with 10 and m 
+    set m as call difference with m and 1 
+finish

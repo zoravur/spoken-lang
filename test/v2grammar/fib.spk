@@ -1,0 +1,15 @@
+begin comment this program prints the first 10 fibonacci numbers finish comment
+declare loop count
+declare a
+declare b
+declare c
+set loop count as 21
+set a as 0
+set b as 1
+while loop count begin
+    set c as call sum with a and b
+    print c
+    set a as b
+    set b as c
+    set loop count as call difference with loop count and 1
+finish

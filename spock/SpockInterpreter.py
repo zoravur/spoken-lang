@@ -1,3 +1,4 @@
+from antlr4 import *
 from gen.SpockLexer import SpockLexer
 from gen.SpockParser import SpockParser
 from gen.SpockVisitor import SpockVisitor
@@ -18,25 +19,41 @@ class SpockInterpreter(SpockVisitor):
             'sixteen': 16, 'seventeen': 17, 'eighteen': 18, 'nineteen': 19, 'twenty': 20
         }
 
+        self._inject_builtins()
+
+    def visitId(self, ctx: SpockParser.IdContext):
+        id = ' '.join(part.getText() for part in ctx.ID_PART())
+        # print(id)
+        return id
+
     def visitProgram(self, ctx):
         return self.visitChildren(ctx)
 
     def visitDeclaration(self, ctx):
-        var_name = ctx.ID().getText()
+        # print(ctx.id_().toStringTree())
+        # print(ctx.expression().toStringTree())
+        # var_name = ctx.ID().getText()
+        var_name = self.visit(ctx.id_())
         # var_type = ctx.type_().getText() if ctx.type_() else None
         self.environment.declare(var_name)
         return None
     
-    def visitDefinition(self, ctx):
+    def visitDefinition(self, ctx: SpockParser.DefinitionContext):
+        # print(self.visitId(ctx.id_()).toStringTree())
+        # print(ctx.expression().toStringTree())
         # var_type = ctx.type_().getText() if ctx.type_() else None
-        value = self.visit(ctx.expression())
-        var_name = ctx.ID().getText()
+        value = self.visitExpression(ctx.expression())
+        # print(value)
+        # var_name = ctx.ID().getText()
+        var_name = self.visit(ctx.id_())
+        # print(f"Defining {var_name} as {value}")
         self.environment.declare(var_name)
         self.environment.set(var_name, value)
         return None
 
     def visitAssignment(self, ctx):
-        var_name = ctx.ID().getText()
+        # var_name = ctx.ID().getText()
+        var_name = self.visit(ctx.id_())
         value = self.visit(ctx.expression())
         self.environment.set(var_name, value)
         # print(self.environment)
@@ -48,9 +65,11 @@ class SpockInterpreter(SpockVisitor):
         print(value)
         return None
 
-    def visitExpression(self, ctx):
-        if ctx.ID():
-            var_name = ctx.ID().getText()
+    def visitExpression(self, ctx: SpockParser.ExpressionContext):
+        # print(list(ctx)[0].toStringTree())
+        if ctx.id_():
+            # var_name = ctx.ID().getText()
+            var_name = self.visitId(ctx.id_())
             # print(self.environment, var_name)
             return self.environment.get(var_name) # throws exception if not defined
         elif ctx.STRING():
@@ -63,34 +82,31 @@ class SpockInterpreter(SpockVisitor):
             return self.visitChildren(ctx)
 
     def visitCall(self, ctx):
+        # print('call')
         args = self.visit(ctx.list_())
+        # print(args)
 
-        if (ctx.ID().getText().lower() == 'sum'):
-            return args[0] + args[1]
-        elif (ctx.ID().getText().lower() == 'product'):
-            return args[0] * args[1]
-        elif (ctx.ID().getText().lower() == 'difference'):
-            return args[0] - args[1]
-        elif (ctx.ID().getText().lower() == 'quotient'):
-            return args[0] // args[1]
-        # else:
-            # raise Exception(f"Function '{ctx.ID().getText()}' not defined")
+        fn = self.visitExpression(ctx.expression())
 
-        func_name = ctx.ID().getText().lower()
-        # if func_name not in self.environment:
-        #     raise Exception(f"Function '{func_name}' not defined")
-        try:
-            return self.environment.get(func_name)(*args)
-        except Exception as e:
-            print(e)
-        # return self.environment.get(func_name)(*args)
+        if callable(fn):
+            return fn(*args)
+
+    def _inject_builtins(self):
+        self.environment.declare('sum')
+        self.environment.set('sum', lambda x, y: x + y)
+        self.environment.declare('product')
+        self.environment.set('product', lambda x, y: x * y)
+        self.environment.declare('difference')
+        self.environment.set('difference', lambda x, y: x - y)
+        self.environment.declare('quotient')
+        self.environment.set('quotient', lambda x, y: x // y)
 
     def visitList(self, ctx):
         result = [self.visit(expr) for expr in ctx.expression()]
         return result
     
     def visitArglist(self, ctx: SpockParser.ArglistContext):
-        return [arg.getText() for arg in ctx.ID()]
+        return [self.visitId(arg) for arg in ctx.id_()]
 
     def visitIfStatement(self, ctx):
         # if self.visit(ctx.expression()):
@@ -114,7 +130,7 @@ class SpockInterpreter(SpockVisitor):
 
     def visitLambda(self, ctx):
         self.args = self.visit(ctx.arglist())
-        
+
         closure = self.environment
         lambda_env = Environment(closure)
 
@@ -133,3 +149,15 @@ class SpockInterpreter(SpockVisitor):
         return_value = self.visit(ctx.expression())
         raise ReturnException(return_value)
         
+def process_input(interpreter, input_text):
+    # print(input_text)
+    input_stream = InputStream(input_text)
+    lexer = SpockLexer(input_stream)
+    stream = CommonTokenStream(lexer)
+    parser = SpockParser(stream)
+    tree = parser.program()
+
+    # print(tree.toStringTree(recog=parser))
+
+    # print('Interpreting...')
+    interpreter.visit(tree)

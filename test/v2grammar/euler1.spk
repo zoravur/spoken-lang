@@ -1,0 +1,25 @@
+define sum of multiples as lambda takes limit and divisor does begin
+    define m as call quotient with limit and divisor
+    escape print m unescape
+    define total as zero
+    escape print total unescape
+    while m begin 
+        set total as call sum with total and call product with m and divisor
+        set m as call difference with m and one
+    finish
+    return total
+finish
+define total as call sum of multiples with 1001 and 3
+escape print quote twelve unquote
+print total unescape
+
+set total as call sum with total and call sum of multiples with 1001 and 5
+escape
+print quote fifteen unquote
+print total
+unescape 
+set total as call difference with total and call sum of multiples with 1001 and 15
+escape
+print quote eighteen unquote
+unescape
+print total

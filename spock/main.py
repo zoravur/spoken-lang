@@ -4,17 +4,7 @@ import argparse
 from antlr4 import *
 from gen.SpockLexer import SpockLexer
 from gen.SpockParser import SpockParser
-from SpockInterpreter import SpockInterpreter
-
-def process_input(interpreter, input_text):
-    input_stream = InputStream(input_text)
-    lexer = SpockLexer(input_stream)
-    stream = CommonTokenStream(lexer)
-    parser = SpockParser(stream)
-    tree = parser.program()
-
-    interpreter.visit(tree)
-
+from SpockInterpreter import SpockInterpreter, process_input
 
 def preprocess_line(line):
     # Necessary because the script for the audio input has a strange format.

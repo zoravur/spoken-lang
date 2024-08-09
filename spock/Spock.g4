@@ -3,7 +3,7 @@ grammar Spock;
 options { caseInsensitive=true; }
 
 // Parser Rules
-program : statement+ ;
+program : statement* ;
 
 statement : declaration
           | definition
@@ -14,53 +14,77 @@ statement : declaration
           | ifStatement
           | block ;
 
-printStatement : 'print' expression ;
+printStatement : PRINT expression ;
 
-returnStatement : 'return' expression ;
+returnStatement : RETURN expression ;
 
-block : 'begin' statement+ 'end' ;
+block : BEGIN statement+ FINISH ;
 
-declaration : 'declare' ID ;
+id : ID_PART+ ;
 
-type : 'function' | 'integer' | 'string' ;
+declaration : DECLARE id ;
 
-assignment : ID 'equals' expression ;
+// type : 'function' | 'integer' | 'string' ;
 
-definition : 'define' ID 'equals' expression ;
+assignment : id EQUALS expression | SET id AS expression;
 
-whileLoop : 'while' 'left' expression 'right' statement ;
+definition : DEFINE id AS expression ;
 
-ifStatement : 'if' 'left' expression 'right' statement ;
+whileLoop : WHILE expression statement ;
 
-expression : ID
+ifStatement : IF expression statement ;
+
+expression : id
            | STRING
            | NUMBER
            | WORD_NUMBER
            | lambda
            | call ;
 
-lambda : 'lambda' 'takes' arglist 'and' 'does' block ;
+lambda : LAMBDA (TAKES arglist)? DOES block ;
 
-call : 'call' ID list ;
+call : CALL expression WITH list ;
 
-arglist : 'left' ID+ 'right' ;
+arglist : id (AND id)* ;
 
-list : 'left' expression+ 'right' ;
+// list : 'left' expression+ 'right' ;
+// list : expression | expression+ 'and' expression ;
+
+list : expression (AND expression)* ;
+
+// Lexer Rules
+PRINT : 'print' ;
+RETURN : 'return' ;
+BEGIN : 'begin';
+FINISH : 'finish';
+DECLARE : 'declare';
+DEFINE : 'define' ;
+EQUALS : 'equals';
+WHILE : 'while';
+IF : 'if';
+LAMBDA : 'lambda';
+TAKES : 'takes';
+DOES : 'does';
+CALL : 'call' | 'col';
+AND : 'and';
+SET : 'set';
+AS : 'as';
+WITH : 'with';
+
 
 WORD_NUMBER : 'zero' | 'one' | 'two' | 'three' | 'four' | 'five' | 'six' | 'seven' | 'eight' | 'nine' | 'ten'
             | 'eleven' | 'twelve' | 'thirteen' | 'fourteen' | 'fifteen' | 'sixteen' | 'seventeen' | 'eighteen' | 'nineteen' | 'twenty' ;
 
-// Lexer Rules
-ID : [a-zA-Z]+ ;
 STRING : 'quote' .*? 'unquote' ;
 NUMBER : [0-9]+ ;
+ID_PART : [a-z]+ ;
 
 
 // Single-line comment
 COMMENT : 'comment' ~[\r\n]* -> skip ;
 
 // Multi-line comment
-MULTILINE_COMMENT : 'begin comment' .*? 'end comment' -> skip ;
+MULTILINE_COMMENT : 'escape' .*? 'unescape' -> skip ;
 
 // Ignore whitespace
 WS : [ \t\r\n]+  -> skip ;

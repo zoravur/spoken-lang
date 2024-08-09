@@ -1,30 +1,24 @@
-define
-square
-equals
+define sum of multiples as
 lambda takes
-left x
-right and
-does begin return
+limit and
+divisor does begin
+define m as
 call
-product left x x
-right end
-and define n equals 10
-while
-left n right
-begin
-print call square left call difference
-left 10
-n right
-n equals call difference left n 1 right end
-print 
-
-
-line 2:0 mismatched input '<EOF>' expecting {'print', 'return', 'begin', 'declare', 'define', 'while', ID}
-Traceback (most recent call last):
-  File "/home/zoravur/Documents/side-projects/spoken-lang/spock/../spock/main.py", line 69, in <module>
-    main()
-  File "/home/zoravur/Documents/side-projects/spoken-lang/spock/../spock/main.py", line 58, in main
-    interpret_live(interpreter)
-  File "/home/zoravur/Documents/side-projects/spoken-lang/spock/../spock/main.py", line 34, in interpret_live
-    for line in sys.stdin:
-KeyboardInterrupt
+quotient with limit
+and divisor
+define total as
+zero
+while m begin set total as call
+sum with
+total and call
+product with m and
+divisor
+set m as call
+difference with m and 1
+finish return total
+finish
+define total as call sum
+of
+multiples with
+1000 and 3
+print total

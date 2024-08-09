@@ -1,0 +1,5 @@
+define power equals lambda takes
+    left x n right and does
+    begin
+        while left n right 
+        

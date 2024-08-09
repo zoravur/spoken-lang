@@ -53,21 +53,21 @@ class SpockListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by SpockParser#id.
+    def enterId(self, ctx:SpockParser.IdContext):
+        pass
+
+    # Exit a parse tree produced by SpockParser#id.
+    def exitId(self, ctx:SpockParser.IdContext):
+        pass
+
+
     # Enter a parse tree produced by SpockParser#declaration.
     def enterDeclaration(self, ctx:SpockParser.DeclarationContext):
         pass
 
     # Exit a parse tree produced by SpockParser#declaration.
     def exitDeclaration(self, ctx:SpockParser.DeclarationContext):
-        pass
-
-
-    # Enter a parse tree produced by SpockParser#type.
-    def enterType(self, ctx:SpockParser.TypeContext):
-        pass
-
-    # Exit a parse tree produced by SpockParser#type.
-    def exitType(self, ctx:SpockParser.TypeContext):
         pass
 
 
@@ -95,6 +95,15 @@ class SpockListener(ParseTreeListener):
 
     # Exit a parse tree produced by SpockParser#whileLoop.
     def exitWhileLoop(self, ctx:SpockParser.WhileLoopContext):
+        pass
+
+
+    # Enter a parse tree produced by SpockParser#ifStatement.
+    def enterIfStatement(self, ctx:SpockParser.IfStatementContext):
+        pass
+
+    # Exit a parse tree produced by SpockParser#ifStatement.
+    def exitIfStatement(self, ctx:SpockParser.IfStatementContext):
         pass
 
 

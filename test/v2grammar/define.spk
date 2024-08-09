@@ -1,0 +1,2 @@
+define x y equals 5
+print x y

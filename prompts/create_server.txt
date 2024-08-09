@@ -1,0 +1,13 @@
+help me write a simple flask app that does the following:
+
+Frontend:
+
+Designed to be viewed on mobile. Consists of a large textarea with a submit button, 
+that submit the text to a server at an endpoint, /run. On iPhone, the textarea should
+have voice input available on the keyboard (I think this will be by default).
+
+Backend:
+
+An endpoint, /, that returns the page described above.
+An endpoint, /run, which calls custom code that will call the function run_command(text: str),
+where text is the value of the textarea, encoded in a post request.

@@ -9,15 +9,23 @@ class SpockInterpreter(SpockVisitor):
 
     def visitProgram(self, ctx):
         return self.visitChildren(ctx)
+    
+    def visitId(self, ctx: SpockParser.IdContext):
+        id = ' '.join(part for part in ctx.ID_PART())
+        print(id)
+        return id
+
 
     def visitDeclaration(self, ctx):
-        var_name = ctx.ID().getText()
+        var_name = self.visit(ctx.ID())
+        # var_name = ctx.ID().getText()
+        print(ctx.ID().getText())
         var_type = ctx.type_().getText() if ctx.type_() else None
         self.variables[var_name] = None
         return None
 
     def visitAssignment(self, ctx):
-        var_name = ctx.ID().getText()
+        var_name = self.visit(ctx.ID())
         value = self.visit(ctx.expression())
         if var_name in self.variables:
             self.variables[var_name] = value
@@ -32,7 +40,8 @@ class SpockInterpreter(SpockVisitor):
 
     def visitExpression(self, ctx):
         if ctx.ID():
-            var_name = ctx.ID().getText()
+            var_name = self.visit(ctx.ID())
+            # var_name = ctx.ID().getText()
             if var_name in self.variables:
                 return self.variables[var_name]
             else:
