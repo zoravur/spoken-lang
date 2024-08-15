@@ -43,7 +43,7 @@ expression : id
 
 lambda : LAMBDA (TAKES arglist)? DOES block ;
 
-call : CALL expression WITH list ;
+call : CALL expression WITH list | CALL expression LEFT list RIGHT ;
 
 arglist : id (AND id)* ;
 
@@ -70,6 +70,8 @@ AND : 'and';
 SET : 'set';
 AS : 'as';
 WITH : 'with';
+LEFT : 'left';
+RIGHT : 'right';
 
 
 WORD_NUMBER : 'zero' | 'one' | 'two' | 'three' | 'four' | 'five' | 'six' | 'seven' | 'eight' | 'nine' | 'ten'

@@ -22,6 +22,7 @@ def interpret_live(interpreter):
     buffer = ""
     
     for line in sys.stdin:
+        # sys.stderr.write(line)
         try:
             line = preprocess_line(line)
             buffer += line + '\n'
@@ -30,10 +31,15 @@ def interpret_live(interpreter):
             loc = buffer.find('flush')
             if loc >= 0:
                 sys.stderr.write(buffer[:loc] + '\n')
-                process_input(interpreter, buffer[:loc])
-                buffer = buffer[loc+5:]
+                try:
+                    process_input(interpreter, buffer[:loc])
+                except Exception as e:
+                    print(f"Error: {e}")
+                finally:
+                    buffer = buffer[loc+5:]
         except Exception as e:
             print(f"Error: {e}")
+
 
 
 def main():

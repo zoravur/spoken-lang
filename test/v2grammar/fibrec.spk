@@ -1,0 +1,11 @@
+define fibonacci recursive as lambda takes n does begin
+    if call equal with n and zero return zero
+    if call equal with n and one return one
+    return call sum with
+        call fibonacci recursive with
+            call difference left n and 1 right
+        and 
+        call fibonacci recursive with
+            call difference with n and 2
+finish
+print call fibonacci recursive with 3

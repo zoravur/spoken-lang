@@ -9,16 +9,16 @@ define sum of multiples as lambda takes limit and divisor does begin
     finish
     return total
 finish
-define total as call sum of multiples with 1001 and 3
+define total as call sum of multiples with 1000 and 3
 escape print quote twelve unquote
 print total unescape
 
-set total as call sum with total and call sum of multiples with 1001 and 5
+set total as call sum with total and call sum of multiples with 1000 and 5
 escape
 print quote fifteen unquote
 print total
 unescape 
-set total as call difference with total and call sum of multiples with 1001 and 15
+set total as call difference with total and call sum of multiples with 1000 and 15
 escape
 print quote eighteen unquote
 unescape

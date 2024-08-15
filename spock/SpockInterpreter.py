@@ -100,6 +100,22 @@ class SpockInterpreter(SpockVisitor):
         self.environment.set('difference', lambda x, y: x - y)
         self.environment.declare('quotient')
         self.environment.set('quotient', lambda x, y: x // y)
+        self.environment.declare('remainder')
+        self.environment.set('remainder', lambda x, y: x % y)
+        self.environment.declare('greater')
+        self.environment.set('greater', lambda x, y: x > y)
+        self.environment.declare('less')
+        self.environment.set('less', lambda x, y: x < y)
+        self.environment.declare('equal')
+        self.environment.set('equal', lambda x, y: x == y)
+        self.environment.declare('not equal')
+        self.environment.set('not equal', lambda x, y: x != y)
+        self.environment.declare('not')
+        self.environment.set('not', lambda x: not x)
+        self.environment.declare('conj')
+        self.environment.set('conj', lambda x, y: x and y)
+        self.environment.declare('or')
+        self.environment.set('or', lambda x, y: x or y)
 
     def visitList(self, ctx):
         result = [self.visit(expr) for expr in ctx.expression()]

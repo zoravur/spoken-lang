@@ -1,41 +1,7 @@
-define sum of multiples as lambda takes
-limit and
-divisor does begin
-define m as
-call quotient with
-limit and divisor
-define total as 0
-while
-m begin set total as call
-sum with
-total and
-call product
-with m and
-divisor set m as call difference
-with m and
-1
-finish
-return total
-finish
-define total as call sum of multiples with
-1001 and 3 set total as call sum
-with total and
-call sum of multiples
-with 1001 and
-5
-set total
-as call difference
-with total and
-call sum of multiples
-with
-1001 and
-15
-print total
-
 Traceback (most recent call last):
-  File "/home/zoravur/Documents/side-projects/spoken-lang/spock/../spock/main.py", line 59, in <module>
+  File "/home/zoravur/Documents/side-projects/spoken-lang/spock/../spock/main.py", line 65, in <module>
     main()
-  File "/home/zoravur/Documents/side-projects/spoken-lang/spock/../spock/main.py", line 48, in main
+  File "/home/zoravur/Documents/side-projects/spoken-lang/spock/../spock/main.py", line 54, in main
     interpret_live(interpreter)
   File "/home/zoravur/Documents/side-projects/spoken-lang/spock/../spock/main.py", line 24, in interpret_live
     for line in sys.stdin:
