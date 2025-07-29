@@ -2,7 +2,7 @@
 
 Yet unstable.
 
-For an introduction to Spock, click [here](https://zoravur.github.io/blog/spock-a-spoken.html)
+For an introduction to Spock, click [here](https://zoravur.com/spock-a-spoken)
 
 ## Get started
 
